@@ -11,31 +11,21 @@
 var express = require('express');
 var app = express();
 
+var mongojs = require('mongojs');
+var db = mongojs('gestion_contacts',['contacts']);
+
 
 //express.static donne l'ordre au serveur d'aller chercher les fichiers(html,css,js)
 app.use(express.static(__dirname + "/public"));
 
 app.get('/contactlist', function(request, response){
   console.log("J'ai recu une request GET");
-  personne1 = {
-    nom : "Joel",
-    courriel : "joel@mail.com",
-    numero : "514-321-3214"
-    };
 
-    personne2 = {
-        nom : "Caroline",
-        courriel : "caroline@mail.com",
-        numero : "514-321-3214"
-    };
-
-    personne3 = {
-        nom : "Charles",
-        courriel : "charles@mail.com",
-        numero : "514-789-3564"
-    };
-    var listeContacts = [personne1, personne2, personne3];
-    response.json(listeContacts); //revoie au controleur la réponse Json
+  db.contacts.find(function(err, docs){
+      console.log(docs);
+      //revoie la réponse Json au controleur qui réagit à la request get /contactlist
+      response.json(docs);
+  });
 });
 
 app.listen(3000);

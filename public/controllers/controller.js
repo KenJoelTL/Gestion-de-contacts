@@ -1,8 +1,12 @@
 var myApp = angular.module('myApp',[]);
+
+//Définition d'un controleur pour le module myApp
 myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
   console.log("Coucou du controleur !");
+
+  //action lorsque requete get /contactlist
   $http.get('/contactlist').then(function(response){
-    console.log("J'ai reçu les données que j'ai demandé");
+    console.log("J'ai reçu les données que j'ai demandées");
     $scope.listeContacts = response.data;
   });
 
