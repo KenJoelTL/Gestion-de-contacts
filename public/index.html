@@ -16,6 +16,7 @@
           <th>Courriel</th>
           <th>Num&eacute;ro</th>
           <th>Action</th>
+          <th>&nbsp;</th>
         </tr>
         <thead>
         <tbody>
@@ -23,18 +24,15 @@
                <td><input class="form-control" ng-model="contact.nom"/></td>
                <td><input class="form-control" ng-model="contact.courriel"/></td>
                <td><input class="form-control" ng-model="contact.numero"/></td>
-               <td><button class="btn btn-primary" ng-click="ajouterContact()">Ajouter ce contact</button>
-                  <button class="btn btn-primary">Modifier</button>
-               </td>
+               <td><button class="btn btn-primary" ng-click="ajouterContact()">Ajouter ce contact</button></td>
+               <td><button class="btn btn-info" ng-click="modifierContact()">Mettre &agrave; jour</button></td>
           </tr>
           <tr ng-repeat="contact in listeContacts">
-            <td>{{contact.nom}}</td>
-            <td>{{contact.courriel}}</td>
-            <td>{{contact.numero}}</td>
-            <td>
-               <button class="btn btn-danger" ng-click="supprimerContact(contact._id)">Supprimer</button>
-            </td>
-
+             <td>{{contact.nom}}</td>
+             <td>{{contact.courriel}}</td>
+             <td>{{contact.numero}}</td>
+             <td><button class="btn btn-danger" ng-click="supprimerContact(contact._id)">Supprimer</button></td>
+             <td><button class="btn btn-success" ng-click="chercherContact(contact._id)">Modifier</button></td>
           </tr>
         </tbody>
     </table>

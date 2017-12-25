@@ -32,4 +32,12 @@ myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
     });
   };
 
+  //fonction pour supprimer un contact de la bd
+  $scope.chercherContact = function(id){
+    console.log(id);
+    $http.get('/contactlist/'+id).then(function(response){
+        $scope.contact = response.data;
+    });
+  };
+
 }]);
