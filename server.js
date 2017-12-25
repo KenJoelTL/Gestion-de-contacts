@@ -13,22 +13,32 @@ var app = express();
 
 var mongojs = require('mongojs');
 var db = mongojs('gestion_contacts',['contacts']);
-
+var bodyParser = require('body-parser');
 
 //express.static donne l'ordre au serveur d'aller chercher les fichiers(html,css,js)
 app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json());
 
 app.get('/contactlist', function(request, response){
   console.log("J'ai recu une request GET");
 
   db.contacts.find(function(err, docs){
       console.log(docs);
-      //revoie la réponse Json au controleur qui réagit à la request get /contactlist
+      //renvoie la réponse Json au controleur qui réagit à la request get /contactlist
       response.json(docs);
   });
 });
 
-app.listen(3000);
+app.post('/contactlist', function(request, response){
+  console.log("J'ai recu une request POST");
+  console.log(request.body);
+
+  // request.body parse the body to json
+  db.contacts.insert(request.body, function(err, doc){
+      response.json(doc); //renvoie l'objet ajouté à la bd
+  });
+});
 
 //-- localhost://3000
+app.listen(3000);
 console.log("Le serveur écoute le port 3000");
