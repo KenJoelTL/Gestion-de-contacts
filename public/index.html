@@ -15,13 +15,26 @@
           <th>Nom</th>
           <th>Courriel</th>
           <th>Num&eacute;ro</th>
+          <th>Action</th>
         </tr>
         <thead>
         <tbody>
+           <tr>
+               <td><input class="form-control" ng-model="contact.nom"/></td>
+               <td><input class="form-control" ng-model="contact.courriel"/></td>
+               <td><input class="form-control" ng-model="contact.numero"/></td>
+               <td><button class="btn btn-primary" ng-click="ajouterContact()">Ajouter ce contact</button>
+                  <button class="btn btn-primary">Modifier</button>
+               </td>
+          </tr>
           <tr ng-repeat="contact in listeContacts">
             <td>{{contact.nom}}</td>
             <td>{{contact.courriel}}</td>
             <td>{{contact.numero}}</td>
+            <td>
+               <button class="btn btn-danger">Supprimer</button>
+            </td>
+
           </tr>
         </tbody>
     </table>
