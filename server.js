@@ -39,6 +39,15 @@ app.post('/contactlist', function(request, response){
   });
 });
 
+app.delete('/contactlist/:id', function(request, response){
+  var id = request.params.id;
+  console.log(id);
+  db.contacts.remove({_id : mongojs.ObjectId(id)}, function(err,doc){
+      response.json(doc);
+  });
+});
+
+
 //-- localhost://3000
 app.listen(3000);
 console.log("Le serveur écoute le port 3000");

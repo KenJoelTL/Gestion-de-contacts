@@ -13,7 +13,7 @@ myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
     });
   };
 
-  rafraichir();
+  rafraichir(); // la fonction sera appelé lors du démmarage de l'app
 
   //fonction pour ajouter un contact à la base de données
   $scope.ajouterContact = function(){
@@ -21,7 +21,15 @@ myApp.controller('AppCtrl',['$scope','$http',function($scope,$http){
     $http.post('/contactlist', $scope.contact).then(function(response){
       console.log(response.data); //contact ajouté à la bd
       rafraichir();
-  });
-};
+    });
+  };
+
+  //fonction pour supprimer un contact de la bd
+  $scope.supprimerContact = function(id){
+    console.log(id);
+    $http.delete('/contactlist/'+id).then(function(response){
+        rafraichir();
+    });
+  };
 
 }]);
