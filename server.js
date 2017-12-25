@@ -55,6 +55,17 @@ app.get('/contactlist/:id', function(request, response){
   });
 });
 
+app.put('/contactlist/:id', function(request, response){
+  var id = request.params.id;
+  console.log(request.body.nom);
+  db.contacts.findAndModify({query : {_id : mongojs.ObjectId(id)},
+      update:{$set: {nom : request.body.nom, courriel :  request.body.courriel, numero : request.body.numero}},
+      new: true}, function(err,doc){
+        response.json(doc);
+  });
+
+});
+
 
 //-- localhost://3000
 app.listen(3000);

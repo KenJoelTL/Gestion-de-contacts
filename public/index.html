@@ -26,6 +26,7 @@
                <td><input class="form-control" ng-model="contact.numero"/></td>
                <td><button class="btn btn-primary" ng-click="ajouterContact()">Ajouter ce contact</button></td>
                <td><button class="btn btn-info" ng-click="modifierContact()">Mettre &agrave; jour</button></td>
+               <td><button class="btn btn-info" ng-click="deselectionnerContact()">Enlever la selection</button></td>
           </tr>
           <tr ng-repeat="contact in listeContacts">
              <td>{{contact.nom}}</td>
