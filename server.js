@@ -20,17 +20,14 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
 app.get('/contactlist', function(request, response){
-  console.log("J'ai recu une request GET");
 
   db.contacts.find(function(err, docs){
-      console.log(docs);
       //renvoie la réponse Json au controleur qui réagit à la request get /contactlist
       response.json(docs);
   });
 });
 
 app.post('/contactlist', function(request, response){
-  console.log("J'ai recu une request POST");
   console.log(request.body);
 
   // request.body parse the body to json
@@ -41,7 +38,6 @@ app.post('/contactlist', function(request, response){
 
 app.delete('/contactlist/:id', function(request, response){
   var id = request.params.id;
-  console.log(id);
   db.contacts.remove({_id : mongojs.ObjectId(id)}, function(err,doc){
       response.json(doc);
   });
@@ -49,7 +45,6 @@ app.delete('/contactlist/:id', function(request, response){
 
 app.get('/contactlist/:id', function(request, response){
   var id = request.params.id;
-  console.log(id);
   db.contacts.findOne({_id : mongojs.ObjectId(id)}, function(err,doc){
       response.json(doc);
   });
@@ -57,7 +52,6 @@ app.get('/contactlist/:id', function(request, response){
 
 app.put('/contactlist/:id', function(request, response){
   var id = request.params.id;
-  console.log(request.body.nom);
   db.contacts.findAndModify({query : {_id : mongojs.ObjectId(id)},
       update:{$set: {nom : request.body.nom, courriel :  request.body.courriel, numero : request.body.numero}},
       new: true}, function(err,doc){
